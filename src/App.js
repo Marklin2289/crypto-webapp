@@ -8,14 +8,15 @@ import Coin from "./Coin";
 function App() {
   const [coins, setCoins] = useState([]);
   const [search, setSearch] = useState("");
+
   useEffect(() => {
     axios
       .get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false"
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&sparkline=false"
       )
       .then((res) => {
         setCoins(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch((error) => console.log(error.message));
   }, []);
@@ -26,6 +27,11 @@ function App() {
   const filteredCoins = coins.filter((coin) =>
     coin.name.toLowerCase().includes(search.toLowerCase())
   );
+
+  // const filteredCoinsSymbol = coins.filter((coin) =>
+  //   coin.symbol.toLowerCase().includes(search.toLowerCase())
+  // );
+
   return (
     <div className="coin-app">
       <div className="coin-search">
